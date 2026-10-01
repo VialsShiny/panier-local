@@ -1,14 +1,25 @@
-import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-import { Tabs } from 'expo-router';
+import { NativeTabs } from 'expo-router/unstable-native-tabs';
 import '../../global.css';
 
 export default function TabsLayout() {
   return (
-    <Tabs>
-      <Tabs.Screen name="index" options={{ title: 'Accueil', tabBarIcon: () => <MaterialCommunityIcons name="home-flood" size={24} color="black" />, tabBarActiveTintColor: "red" }} />
-      <Tabs.Screen name="map" options={{ title: 'Carte', tabBarIcon: () => <MaterialCommunityIcons name="map-marker" size={24} color="black" /> }} />
-      <Tabs.Screen name="scan" options={{ title: 'Scanner', tabBarIcon: () => <MaterialCommunityIcons name="qrcode-scan" size={24} color="black" /> }} />
-      <Tabs.Screen name="profile" options={{ title: 'Profil', tabBarIcon: () => <MaterialCommunityIcons name="account" size={24} color="black" /> }} />
-    </Tabs>
+    <NativeTabs>
+      <NativeTabs.Trigger name="index">
+        <NativeTabs.Trigger.Label>Home</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Icon sf="house.fill" md="home" />
+      </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="map">
+        <NativeTabs.Trigger.Label>Map</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Icon sf="map" md="map" />
+      </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="scan">
+        <NativeTabs.Trigger.Label>Scan</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Icon sf="qrcode" md="qrcode" />
+      </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="profile">
+        <NativeTabs.Trigger.Label>Profile</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Icon sf="person" md="person" />
+      </NativeTabs.Trigger>
+    </NativeTabs>
   );
 }
