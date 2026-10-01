@@ -1,5 +1,17 @@
-import FeaturePlaceholder from '../../components/feature-placeholder';
+import { StyleSheet, Text, View } from 'react-native';
 
 export default function MapScreen() {
-  return <FeaturePlaceholder title="Carte" />;
+  return (
+    <View style={styles.container}>
+      <Text>Carte</Text>
+    </View>
+  );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});

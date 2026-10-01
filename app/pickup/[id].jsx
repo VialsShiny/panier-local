@@ -1,9 +1,20 @@
 import { useLocalSearchParams } from 'expo-router';
-
-import FeaturePlaceholder from '../../components/feature-placeholder';
+import { StyleSheet, Text, View } from 'react-native';
 
 export default function PickupDetailsScreen() {
   const { id } = useLocalSearchParams();
 
-  return <FeaturePlaceholder title={`Point de collecte ${id}`} />;
+  return (
+    <View style={styles.container}>
+      <Text>Point de collecte {id}</Text>
+    </View>
+  );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});

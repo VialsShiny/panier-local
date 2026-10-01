@@ -4,46 +4,19 @@ module.exports = {
     slug: 'panier-local',
     version: '1.0.0',
     orientation: 'portrait',
-    icon: './assets/images/icon.png',
     scheme: 'panierlocal',
     userInterfaceStyle: 'automatic',
-    ios: {
-      icon: './assets/expo.icon',
-    },
     android: {
-      adaptiveIcon: {
-        backgroundColor: '#E6F4FE',
-        foregroundImage: './assets/images/android-icon-foreground.png',
-        backgroundImage: './assets/images/android-icon-background.png',
-        monochromeImage: './assets/images/android-icon-monochrome.png',
-      },
       predictiveBackGestureEnabled: false,
     },
     web: {
       output: 'static',
-      favicon: './assets/images/favicon.png',
     },
-    plugins: [
-      'expo-router',
-      [
-        'expo-splash-screen',
-        {
-          backgroundColor: '#208AEF',
-          image: './assets/images/splash-icon.png',
-          imageWidth: 76,
-        },
-      ],
-      'expo-secure-store',
-      'expo-sqlite',
-    ],
-    experiments: {
-      typedRoutes: true,
-      reactCompiler: true,
+    plugins: ['expo-router'],
+    extra: {
+      eas: {
+        projectId: '1f565a66-9248-4234-aeec-1e45b57d95c0',
+      },
     },
-    "extra": {
-      "eas": {
-        "projectId": "1f565a66-9248-4234-aeec-1e45b57d95c0"
-      }
-    }
   },
 };
