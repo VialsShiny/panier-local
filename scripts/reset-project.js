@@ -2,7 +2,7 @@
 
 /**
  * This script is used to reset the project to a blank state.
- * It deletes or moves the /src and /scripts directories to /example based on user input and creates a new /src/app directory with an index.tsx and _layout.tsx file.
+ * It resets application source folders and recreates the default Expo Router structure.
  * You can remove the `reset-project` script from package.json and safely delete this file after running it.
  */
 
@@ -11,36 +11,81 @@ const path = require("path");
 const readline = require("readline");
 
 const root = process.cwd();
-const oldDirs = ["src", "scripts"];
+const oldDirs = ["app", "components", "hooks", "services", "utils", "constants"];
 const exampleDir = "example";
-const newAppDir = "src/app";
+const newAppDir = "app";
 const exampleDirPath = path.join(root, exampleDir);
 
-const indexContent = `import { Text, View, StyleSheet } from "react-native";
+const indexContent = `import { Redirect } from "expo-router";
 
 export default function Index() {
-  return (
-    <View style={styles.container}>
-      <Text>Edit src/app/index.tsx to edit this screen.</Text>
-    </View>
-  );
+  return <Redirect href="/(tabs)" />;
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
 `;
 
 const layoutContent = `import { Stack } from "expo-router";
 
 export default function RootLayout() {
-  return <Stack />;
+  return (
+    <Stack>
+      <Stack.Screen name="index" options={{ headerShown: false }} />
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen name="pickup/[id]" options={{ title: "Pickup" }} />
+    </Stack>
+  );
 }
 `;
+
+const tabsLayoutContent = `import { Tabs } from "expo-router";
+
+export default function TabsLayout() {
+  return (
+    <Tabs>
+      <Tabs.Screen name="index" options={{ title: "Home" }} />
+      <Tabs.Screen name="map" options={{ title: "Map" }} />
+      <Tabs.Screen name="scan" options={{ title: "Scan" }} />
+      <Tabs.Screen name="profile" options={{ title: "Profile" }} />
+    </Tabs>
+  );
+}
+`;
+
+const placeholderContent = (title) => `import { Text, View } from "react-native";
+
+export default function Screen() {
+  return (
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <Text>${title}</Text>
+    </View>
+  );
+}
+`;
+
+const routeFiles = [
+  ["index.jsx", indexContent],
+  ["_layout.jsx", layoutContent],
+  ["(tabs)/_layout.jsx", tabsLayoutContent],
+  ["(tabs)/index.jsx", placeholderContent("Edit app/(tabs)/index.jsx")],
+  ["(tabs)/map.jsx", placeholderContent("Map")],
+  ["(tabs)/scan.jsx", placeholderContent("Scan")],
+  ["(tabs)/profile.jsx", placeholderContent("Profile")],
+  [
+    "pickup/[id].jsx",
+    `import { useLocalSearchParams } from "expo-router";
+import { Text, View } from "react-native";
+
+export default function PickupDetails() {
+  const { id } = useLocalSearchParams();
+
+  return (
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <Text>Pickup {id}</Text>
+    </View>
+  );
+}
+`,
+  ],
+];
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -72,24 +117,21 @@ const moveDirectories = async (userInput) => {
       }
     }
 
-    // Create new /src/app directory
-    const newAppDirPath = path.join(root, newAppDir);
-    await fs.promises.mkdir(newAppDirPath, { recursive: true });
-    console.log("\n📁 New /src/app directory created.");
-
-    // Create index.tsx
-    const indexPath = path.join(newAppDirPath, "index.tsx");
-    await fs.promises.writeFile(indexPath, indexContent);
-    console.log("📄 src/app/index.tsx created.");
-
-    // Create _layout.tsx
-    const layoutPath = path.join(newAppDirPath, "_layout.tsx");
-    await fs.promises.writeFile(layoutPath, layoutContent);
-    console.log("📄 src/app/_layout.tsx created.");
+    await fs.promises.mkdir(path.join(root, newAppDir), { recursive: true });
+    for (const directory of ["(tabs)", "pickup"]) {
+      await fs.promises.mkdir(path.join(root, newAppDir, directory), { recursive: true });
+    }
+    for (const directory of ["components", "hooks", "services", "utils", "constants"]) {
+      await fs.promises.mkdir(path.join(root, directory), { recursive: true });
+    }
+    for (const [file, content] of routeFiles) {
+      await fs.promises.writeFile(path.join(root, newAppDir, file), content);
+    }
+    console.log("\n📁 Default app structure created.");
 
     console.log("\n✅ Project reset complete. Next steps:");
     console.log(
-      `1. Run \`npx expo start\` to start a development server.\n2. Edit src/app/index.tsx to edit the main screen.\n3. Put all your application code in /src, only screens and layout files should be in /src/app.${
+      `1. Run \`npx expo start\` to start a development server.\n2. Edit app/(tabs)/index.jsx to edit the main screen.\n3. Put screens in /app and shared code in /components, /hooks, /services, /utils, or /constants.${
         userInput === "y"
           ? `\n4. Delete the /${exampleDir} directory when you're done referencing it.`
           : ""
