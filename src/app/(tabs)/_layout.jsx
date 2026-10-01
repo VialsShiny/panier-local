@@ -1,13 +1,36 @@
-import { Tabs } from 'expo-router';
+import { NativeTabs } from 'expo-router/unstable-native-tabs';
+import { DynamicColorIOS } from 'react-native';
 import '../../global.css';
 
 export default function TabsLayout() {
   return (
-    <Tabs>
-      <Tabs.Screen name="index" options={{ title: 'Accueil' }} />
-      <Tabs.Screen name="map" options={{ title: 'Carte' }} />
-      <Tabs.Screen name="scan" options={{ title: 'Scanner' }} />
-      <Tabs.Screen name="profile" options={{ title: 'Profil' }} />
-    </Tabs>
+    <NativeTabs
+      labelStyle={{
+        color: DynamicColorIOS({
+          dark: 'white',
+          light: 'black',
+        }),
+      }}
+      tintColor={DynamicColorIOS({
+        dark: 'white',
+        light: 'black',
+      })}>
+      <NativeTabs.Trigger name="index">
+        <NativeTabs.Trigger.Label>Home</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Icon sf="house.fill" md="home" />
+      </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="map">
+        <NativeTabs.Trigger.Label>Map</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Icon sf="map" md="map" />
+      </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="scan">
+        <NativeTabs.Trigger.Label>Scan</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Icon sf="qrcode" md="qrcode" />
+      </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="profile">
+        <NativeTabs.Trigger.Label>Profile</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Icon sf="person" md="person" />
+      </NativeTabs.Trigger>
+    </NativeTabs>
   );
 }
