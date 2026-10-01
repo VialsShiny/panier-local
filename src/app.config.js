@@ -11,6 +11,7 @@ module.exports = {
     },
     web: {
       output: 'static',
+      bundler: 'metro',
     },
     plugins: ['expo-router'],
     extra: {

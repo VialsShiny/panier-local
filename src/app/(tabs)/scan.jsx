@@ -2,8 +2,8 @@ import { Text, View } from 'react-native';
 
 export default function ScanScreen() {
   return (
-    <View className="flex justify-center items-center h-full bg-red-200">
-      <Text>Scanner</Text>
+    <View className="flex-1 items-center justify-center">
+      <Text>Scan</Text>
     </View>
   );
 }
