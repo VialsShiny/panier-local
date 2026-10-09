@@ -1,7 +1,8 @@
+import { Colors } from '@/constants/theme';
+import '@/global.css';
 import { NativeTabs } from 'expo-router/unstable-native-tabs';
 import { DynamicColorIOS } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import '../../global.css';
 
 export default function TabsLayout() {
   return (
@@ -9,13 +10,13 @@ export default function TabsLayout() {
       <NativeTabs
         labelStyle={{
           color: DynamicColorIOS({
-            dark: 'white',
-            light: 'black',
+            dark: Colors.dark.secondary,
+            light: Colors.light.primary,
           }),
         }}
         tintColor={DynamicColorIOS({
-          dark: 'white',
-          light: 'black',
+          dark: Colors.dark.secondary,
+          light: Colors.light.primary,
         })}>
         <NativeTabs.Trigger name="index">
           <NativeTabs.Trigger.Label>Home</NativeTabs.Trigger.Label>
