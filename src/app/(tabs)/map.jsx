@@ -1,9 +1,10 @@
-import { Text, View } from 'react-native';
+import { AppText } from '@/components/ui/index';
+import { View } from 'react-native';
 
 export default function MapScreen() {
   return (
     <View className="flex-1 items-center justify-center">
-      <Text className="text-xl font-bold">Carte</Text>
+      <AppText variant='title'>Carte</AppText>
     </View>
   );
 }
