@@ -1,8 +1,9 @@
 import { BasketCard } from '@/components/BasketCard';
 import { AppText } from '@/components/ui/index';
-import { getBasketsId } from '@/services/basketsService';
+import { getBaskets } from '@/services/basketsService';
 import { useEffect, useState } from 'react';
-import { View } from 'react-native';
+import { FlatList, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function HomeScreen() {
   const [baskets, setBaskets] = useState([]);
@@ -10,7 +11,7 @@ export default function HomeScreen() {
 
   useEffect(() => {
     const loadBaskets = async () => {
-      const data = await getBasketsId("basket-001");
+      const data = await getBaskets();
       setBaskets(data);
       setIsLoading(false);
     }
@@ -27,9 +28,15 @@ export default function HomeScreen() {
   }
 
   return (
-    <View className="flex-1 items-center justify-center">
-      <AppText className="text-xxl" variant='title'>Panier local</AppText>
-      <BasketCard data={baskets} />
-    </View>
+    <SafeAreaView className="flex-1 pb-2">
+      <View className="flex-1 items-center justify-center">
+        <AppText className="text-xxl" variant='title'>Panier local</AppText>
+        <FlatList
+          data={baskets}
+          renderItem={({ item }) => <BasketCard data={item} />}
+          keyExtractor={item => item.id}
+        />
+      </View>
+    </SafeAreaView>
   );
 }
