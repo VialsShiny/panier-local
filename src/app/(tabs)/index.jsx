@@ -1,13 +1,21 @@
 import { BasketCard } from '@/components/BasketCard';
 import { AppText } from '@/components/ui/index';
 import { getBaskets } from '@/services/basketsService';
-import { useEffect, useState } from 'react';
-import { FlatList, View } from 'react-native';
+import { useCallback, useEffect, useState } from 'react';
+import { FlatList, RefreshControl, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function HomeScreen() {
   const [baskets, setBaskets] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
+  }, []);
 
   useEffect(() => {
     const loadBaskets = async () => {
@@ -29,14 +37,19 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaView className="flex-1 pb-2">
-      <View className="flex-1 items-center justify-center">
-        <AppText className="text-xxl" variant='title'>Panier local</AppText>
-        <FlatList
-          data={baskets}
-          renderItem={({ item }) => <BasketCard data={item} />}
-          keyExtractor={item => item.id}
-        />
-      </View>
+      <ScrollView
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }>
+        <View className="flex-1 justify-center items-center">
+          <AppText className="text-xxl" variant='title'>Panier local</AppText>
+          <FlatList
+            data={baskets}
+            renderItem={({ item }) => <BasketCard data={item} />}
+            keyExtractor={item => item.id}
+          />
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
