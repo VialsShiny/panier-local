@@ -1,7 +1,8 @@
 import { AppText, Badge, Card } from "@/components/ui";
+import { memo } from "react";
 import { View } from "react-native";
 
-export default function BasketCard(data) {
+export const BasketCard = memo((data) => {
   if (data.data) data = data.data;
 
   return (
@@ -14,4 +15,4 @@ export default function BasketCard(data) {
       <AppText className="mt-6 text-right text-xs" variant="caption">{data.timeSlot}</AppText>
     </Card>
   )
-}
+})

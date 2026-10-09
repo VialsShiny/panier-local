@@ -1,4 +1,4 @@
-import BasketCard from '@/components/BasketCard';
+import { BasketCard } from '@/components/BasketCard';
 import { AppText } from '@/components/ui/index';
 import { getBasketsId } from '@/services/basketsService';
 import { useEffect, useState } from 'react';
