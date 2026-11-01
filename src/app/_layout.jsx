@@ -1,13 +1,15 @@
-import '@/global.css';
-import { Link, Stack } from 'expo-router';
-import { Pressable, Text, View } from 'react-native';
+import "@/global.css";
+import { Link, Stack } from "expo-router";
+import { Pressable, Text, View } from "react-native";
 
 export function ErrorBoundary({ error, retry }) {
   return (
     <View className="flex-1 items-center justify-center bg-white p-6">
       <Text className="mb-2 text-2xl font-bold">Une erreur est survenue</Text>
       <Text className="mb-6 text-center text-gray-600">
-        {__DEV__ ? error.message : "Quelque chose s'est mal passé. Réessayez dans un instant."}
+        {__DEV__
+          ? error.message
+          : "Quelque chose s'est mal passé. Réessayez dans un instant."}
       </Text>
 
       <View className="w-full gap-3">
@@ -35,7 +37,10 @@ export default function RootLayout() {
     <Stack>
       <Stack.Screen name="index" options={{ headerShown: false }} />
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      <Stack.Screen name="pickup/[id]" options={{ title: 'Point de collecte' }} />
+      <Stack.Screen
+        name="pickup/[id]"
+        options={{ title: "Point de collecte", headerShown: false }}
+      />
     </Stack>
   );
 }
