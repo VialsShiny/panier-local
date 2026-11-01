@@ -2,14 +2,14 @@
 
 Application mobile iOS et Android pour accompagner les adhérents dans le retrait de paniers de producteurs : consulter les retraits, repérer les points de collecte et valider un retrait.
 
-![Expo SDK 57](https://img.shields.io/badge/Expo-SDK%2057-000020?logo=expo&logoColor=white)
-![React Native 0.86](https://img.shields.io/badge/React%20Native-0.86-61DAFB?logo=react&logoColor=black)
+![Expo SDK 58](https://img.shields.io/badge/Expo-SDK%2058-000020?logo=expo&logoColor=white)
+![React Native 0.88](https://img.shields.io/badge/React%20Native-0.88-61DAFB?logo=react&logoColor=black)
 ![NativeWind 4](https://img.shields.io/badge/NativeWind-4-38BDF8?logo=tailwindcss&logoColor=white)
 ![JavaScript JSX](https://img.shields.io/badge/JavaScript-JSX-F7DF1E?logo=javascript&logoColor=black)
 
 ## Stack technique
 
-- **Expo SDK 57** et **React Native 0.86**
+- **Expo SDK 58** et **React Native 0.88**
 - **React 19**
 - **Expo Router** pour la navigation basée sur les fichiers
 - **JavaScript et JSX**
@@ -38,13 +38,13 @@ npm install
 
 Depuis `src/`, lancer l’application avec l’une de ces commandes :
 
-| Commande | Cible |
-| --- | --- |
-| `npm start` | Serveur de développement Expo |
-| `npm run android` | Android |
-| `npm run ios` | iOS |
-| `npm run web` | Web |
-| `npm run lint` | Vérification du code |
+| Commande          | Cible                         |
+| ----------------- | ----------------------------- |
+| `npm start`       | Serveur de développement Expo |
+| `npm run android` | Android                       |
+| `npm run ios`     | iOS                           |
+| `npm run web`     | Web                           |
+| `npm run lint`    | Vérification du code          |
 
 ## Fonctionnalités de l’application
 
@@ -104,7 +104,7 @@ La configuration NativeWind relie Tailwind au pipeline de compilation Expo :
 Exemple d’utilisation dans un écran :
 
 ```jsx
-import { Text, View } from 'react-native';
+import { Text, View } from "react-native";
 
 export default function Example() {
   return (
