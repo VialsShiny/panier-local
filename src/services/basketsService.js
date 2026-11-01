@@ -1,12 +1,27 @@
-import { mockBaskets } from '@/services/baskets.mock';
+import { mockBaskets } from "@/services/baskets.mock";
 
 async function getBaskets() {
-  return mockBaskets;
-};
-
-function getBasketsId(id) {
-  return mockBaskets.find((el) => el.id == id) || `Nous n'avons pas pu trouver de panier accordé à l'id : ${id}`;
+  return {
+    status: true,
+    message: "Liste des paniers",
+    data: mockBaskets,
+  };
 }
 
-export { getBaskets, getBasketsId };
+function getBasketsById(id) {
+  const basket = mockBaskets.find((item) => item.id === id);
 
+  return basket
+    ? {
+        status: true,
+        message: "Panier trouvé",
+        data: basket,
+      }
+    : {
+        status: false,
+        message: "Panier non trouvé",
+        data: null,
+      };
+}
+
+export { getBaskets, getBasketsById };

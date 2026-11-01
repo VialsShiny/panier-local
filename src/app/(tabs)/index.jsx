@@ -6,26 +6,25 @@ import { FlatList, RefreshControl, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
-  const [baskets, setBaskets] = useState([]);
+  const [baskets, setBaskets] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
 
-  const onRefresh = useCallback(() => {
-    setRefreshing(true);
-    setTimeout(() => {
-      setRefreshing(false);
-    }, 2000);
+  const loadBaskets = useCallback(async () => {
+    const data = await getBaskets();
+    setBaskets(data);
+    setIsLoading(false);
+    setRefreshing(false);
   }, []);
 
-  useEffect(() => {
-    const loadBaskets = async () => {
-      const data = await getBaskets();
-      setBaskets(data);
-      setIsLoading(false);
-    };
-
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
     loadBaskets();
-  }, [baskets]);
+  }, [loadBaskets]);
+
+  useEffect(() => {
+    loadBaskets();
+  }, [loadBaskets]);
 
   if (isLoading) {
     return (
@@ -40,7 +39,7 @@ export default function HomeScreen() {
   return (
     <SafeAreaView className="flex-1 pb-2">
       <FlatList
-        data={baskets}
+        data={baskets.data ?? []}
         renderItem={({ item }) => <BasketCard data={item} />}
         keyExtractor={(item) => item.id}
         className="flex-1 mx-auto"
