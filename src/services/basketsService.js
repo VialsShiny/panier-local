@@ -8,7 +8,7 @@ async function getBaskets() {
   };
 }
 
-function getBasketsById(id) {
+function getBasketById(id) {
   const basket = mockBaskets.find((item) => item.id === id);
 
   return basket
@@ -24,4 +24,4 @@ function getBasketsById(id) {
       };
 }
 
-export { getBaskets, getBasketsById };
+export { getBasketById, getBaskets };
