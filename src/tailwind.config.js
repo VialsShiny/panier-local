@@ -6,6 +6,7 @@ module.exports = {
     "./app/**/*.{js,jsx}",
     "./components/**/*.{js,jsx}",
   ],
+  darkMode: "media",
   presets: [require("nativewind/preset")],
   theme: {
     extend: {
@@ -24,6 +25,17 @@ module.exports = {
         success: Colors.light.success,
         warning: Colors.light.warning,
         error: Colors.light.error,
+
+        "dark-primary": Colors.dark.primary,
+        "dark-secondary": Colors.dark.secondary,
+        "dark-background": Colors.dark.background,
+        "dark-foreground": Colors.dark.foreground,
+        "dark-card": Colors.dark.card,
+        "dark-border": Colors.dark.border,
+        "dark-muted": Colors.dark.muted,
+        "dark-success": Colors.dark.success,
+        "dark-warning": Colors.dark.warning,
+        "dark-error": Colors.dark.error,
       },
 
       spacing: {

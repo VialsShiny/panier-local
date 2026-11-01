@@ -1,9 +1,9 @@
 import { Text } from 'react-native';
 
 const variants = {
-  body: 'text-base text-foreground',
-  title: 'text-xl font-bold text-foreground',
-  caption: 'text-sm text-muted',
+  body: 'text-base text-foreground dark:text-dark-foreground',
+  title: 'text-xl font-bold text-foreground dark:text-dark-foreground',
+  caption: 'text-sm text-muted dark:text-dark-muted',
 };
 
 /**

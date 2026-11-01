@@ -12,7 +12,7 @@ export function Card({ children, className = '', ...props }) {
   return (
     <View
       {...props}
-      className={`rounded-lg border border-border bg-card p-md ${className}`}
+      className={`rounded-lg border border-border bg-card p-md dark:border-dark-border dark:bg-dark-card ${className}`}
     >
       {children}
     </View>

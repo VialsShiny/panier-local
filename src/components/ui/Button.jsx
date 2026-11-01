@@ -1,9 +1,18 @@
 import { Pressable, Text } from 'react-native';
 
 const variants = {
-  primary: { container: 'bg-primary', text: 'text-white' },
-  secondary: { container: 'bg-secondary', text: 'text-white' },
-  outline: { container: 'border border-primary bg-transparent', text: 'text-primary' },
+  primary: {
+    container: 'bg-primary dark:bg-dark-primary',
+    text: 'text-white',
+  },
+  secondary: {
+    container: 'bg-secondary dark:bg-dark-secondary',
+    text: 'text-white',
+  },
+  outline: {
+    container: 'border border-primary bg-transparent dark:border-dark-secondary',
+    text: 'text-primary dark:text-dark-foreground',
+  },
 };
 
 /**

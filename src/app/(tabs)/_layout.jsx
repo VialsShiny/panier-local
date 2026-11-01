@@ -1,23 +1,21 @@
 import { Colors } from "@/constants/theme";
 import "@/global.css";
 import { NativeTabs } from "expo-router/native-tabs";
-import { DynamicColorIOS } from "react-native";
+import { useColorScheme } from "nativewind";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function TabsLayout() {
+  const { colorScheme } = useColorScheme();
+  const tintColor =
+    colorScheme === "dark" ? Colors.dark.tabTint : Colors.light.primary;
+
   return (
-    <SafeAreaView className="flex-1">
+    <SafeAreaView className="flex-1 bg-background dark:bg-dark-background">
       <NativeTabs
         labelStyle={{
-          color: DynamicColorIOS({
-            dark: Colors.dark.secondary,
-            light: Colors.light.primary,
-          }),
+          color: tintColor,
         }}
-        tintColor={DynamicColorIOS({
-          dark: Colors.dark.secondary,
-          light: Colors.light.primary,
-        })}
+        tintColor={tintColor}
       >
         <NativeTabs.Trigger name="index">
           <NativeTabs.Trigger.Label>Home</NativeTabs.Trigger.Label>

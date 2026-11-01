@@ -9,11 +9,11 @@ export const Colors = {
     card: '#FFFFFF',
     border: '#D9E2EC',
 
-    muted: '#64748B',
+    muted: '#475569',
 
-    success: '#16A34A',
-    warning: '#D97706',
-    error: '#DC2626',
+    success: '#166534',
+    warning: '#92400E',
+    error: '#B91C1C',
   },
 
   dark: {
@@ -31,6 +31,7 @@ export const Colors = {
     success: '#4ADE80',
     warning: '#FBBF24',
     error: '#F87171',
+    tabTint: '#89CFF0',
   },
 };
 
