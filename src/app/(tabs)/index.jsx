@@ -1,9 +1,9 @@
-import { BasketCard } from '@/components/BasketCard';
-import { AppText } from '@/components/ui/index';
-import { getBaskets } from '@/services/basketsService';
-import { useCallback, useEffect, useState } from 'react';
-import { FlatList, RefreshControl, ScrollView, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { BasketCard } from "@/components/BasketCard";
+import { AppText } from "@/components/ui/index";
+import { getBaskets } from "@/services/basketsService";
+import { useCallback, useEffect, useState } from "react";
+import { FlatList, RefreshControl, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
   const [baskets, setBaskets] = useState([]);
@@ -22,7 +22,7 @@ export default function HomeScreen() {
       const data = await getBaskets();
       setBaskets(data);
       setIsLoading(false);
-    }
+    };
 
     loadBaskets();
   }, [baskets]);
@@ -30,26 +30,35 @@ export default function HomeScreen() {
   if (isLoading) {
     return (
       <View className="flex-1 items-center justify-center">
-        <AppText className="text-xxl" variant='title'>Chargement...</AppText>
+        <AppText className="text-xxl" variant="title">
+          Chargement...
+        </AppText>
       </View>
-    )
+    );
   }
 
   return (
     <SafeAreaView className="flex-1 pb-2">
-      <ScrollView
+      <FlatList
+        data={baskets}
+        renderItem={({ item }) => <BasketCard data={item} />}
+        keyExtractor={(item) => item.id}
+        className="flex-1 mx-auto"
+        ListHeaderComponent={
+          <View className="mx-auto px-4">
+            <AppText className="text-xxl" variant="title">
+              Panier local
+            </AppText>
+          </View>
+        }
         refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }>
-        <View className="flex-1 justify-center items-center">
-          <AppText className="text-xxl" variant='title'>Panier local</AppText>
-          <FlatList
-            data={baskets}
-            renderItem={({ item }) => <BasketCard data={item} />}
-            keyExtractor={item => item.id}
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            tintColor={"#64748B"}
           />
-        </View>
-      </ScrollView>
+        }
+      />
     </SafeAreaView>
   );
 }
